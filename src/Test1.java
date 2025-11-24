@@ -42,15 +42,14 @@ public class Test1 {
 
         while(true){
             DrawSurface d = gui.getDrawSurface();
-            b1.drawOnGUI(d);
-            b2.drawOnGUI(d);
-            b3.drawOnGUI(d);
-            topBlock.drawOnGUI(d);
-            bottomBlock.drawOnGUI(d);
-            leftBlock.drawOnGUI(d);
-            rightBlock.drawOnGUI(d);
-            //ball.moveOneStep();
-            ball.moveTillCollition();
+            b1.drawOn(d);
+            b2.drawOn(d);
+            b3.drawOn(d);
+            topBlock.drawOn(d);
+            bottomBlock.drawOn(d);
+            leftBlock.drawOn(d);
+            rightBlock.drawOn(d);
+            ball.moveOneStep();
             //ball.getTrejectory().drawOn(d);
             ball.drawOn(d);
             sleeper.sleepFor(10);

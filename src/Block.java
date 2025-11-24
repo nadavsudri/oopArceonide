@@ -1,12 +1,18 @@
 import biuoop.DrawSurface;
-import biuoop.GUI;
 
-public class Block implements Collidable {
+import java.awt.*;
+
+public class Block implements Collidable,Sprite {
+    //Fields
+    private int life=1;
     private Rectangle shape;
     private Line top;
     private Line bottom;
     private Line left;
     private Line right;
+    private java.awt.Color color;
+
+    //constructor
     public Block(Rectangle shape) {
         this.shape = shape;
         this.top = new Line(shape.topLeft, new Point(shape.topLeft.getX()+shape.getWidth(), shape.topLeft.getY()));
@@ -18,27 +24,37 @@ public class Block implements Collidable {
     public Rectangle getCollisionRectangle(){
         return shape;
     }
+    public void setColor(java.awt.Color color) {
+        this.color = color;
+    }
+    public int getLife() {
+        return life;
+    }
+    //Covers the possible hit options and returns a new velocity.
     @Override
     public  Velocity hit(Point collisionPoint, Velocity currentVelocity){
-        System.out.println("hit!" + collisionPoint);
+        this.life--;
         if(top.isOnLine(collisionPoint)){
-            System.out.println("top is online");
-            System.out.println(-currentVelocity.getDy());
-            return (new Velocity(currentVelocity.getDx(),-currentVelocity.getDy()));
-        }
+            return (new Velocity(currentVelocity.getDx(),-currentVelocity.getDy()));}
         if(bottom.isOnLine(collisionPoint)){
-            System.out.println("bottom is online");
             return (new Velocity(currentVelocity.getDx(),-currentVelocity.getDy()));}
         if(left.isOnLine(collisionPoint)){
-            System.out.println("left is online");
             return (new Velocity(-currentVelocity.getDx(), currentVelocity.getDy()));}
         if(right.isOnLine(collisionPoint)){
-            System.out.println("right is online");
             return (new Velocity(-currentVelocity.getDx(), currentVelocity.getDy()));}
         return currentVelocity;
     }
-    public void drawOnGUI(DrawSurface surface){
-        surface.setColor(java.awt.Color.BLACK);
+
+    //Draw on a given Draw surface
+    public void drawOn(DrawSurface surface){
+        surface.setColor(color);
         surface.fillRectangle((int)shape.topLeft.getX(),(int)shape.topLeft.getY(),(int)shape.getWidth(),(int)shape.getHeight());
+        surface.setColor(Color.black);
+        surface.drawRectangle((int)shape.topLeft.getX(),(int)shape.topLeft.getY(),(int)shape.getWidth(),(int)shape.getHeight());
+    }
+    @Override
+    public void timePassed(){
+
+
     }
 }

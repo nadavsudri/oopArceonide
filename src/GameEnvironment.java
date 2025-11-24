@@ -8,6 +8,9 @@ public class GameEnvironment {
     public void addCollidable(Collidable c){
         collidables.add(c);
     }
+    public void removeCollidable(Collidable c){
+        collidables.remove(c);
+    }
     // Assume an object moving from line.start() to line.end().
     // If this object will not collide with any of the collidables
     // in this collection, return null. Else, return the information

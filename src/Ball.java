@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.awt.Color;
 
-public class Ball {
+public class Ball implements Sprite {
     Point center;
     double radius;
     java.awt.Color color;
@@ -73,20 +73,17 @@ public class Ball {
      * Ex. the ball touched the upper bound -> it should go down -> the dy sets as -dy.
      *
      **/
+
     public void moveOneStep() {
-        this.center = this.getVelocity().applyToPoint(this.center);
-    }
-    public void moveTillCollition() {
        CollisionInfo closestCollidable = this.gameENV.getClosestCollision(this.getTrejectory());
        if (closestCollidable == null) {
-           moveOneStep();
+           this.center = this.getVelocity().applyToPoint(this.center);
            return;
        }
        Point collition = closestCollidable.collisionPoint();
        Collidable collitionObject = closestCollidable.collisionObject();
        this.center = new Point(collition.getX()-this.velocity.getDx()*Constants.EPS, collition.getY()-this.velocity.getDy()*Constants.EPS);
        this.velocity = collitionObject.hit(collition,this.velocity);
-        System.out.println(this.velocity.getDx()+" "+this.velocity.getDy());
     }
     //returns random color from java.awt.Color lib
     public static java.awt.Color getRandomColor() {
@@ -95,6 +92,10 @@ public class Ball {
         int green = rand.nextInt(255);
         int blue = rand.nextInt(255);
         return new java.awt.Color(red,green,blue);
+    }
+    @Override
+    public void timePassed(){
+        moveOneStep();
     }
 
 }
