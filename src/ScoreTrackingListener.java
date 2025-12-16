@@ -1,4 +1,14 @@
-package PACKAGE_NAME;
+public class ScoreTrackingListener implements HitListener {
+    private Counter currentScore;
 
-public class ScoreTrackingListener {
+    public ScoreTrackingListener(Counter scoreCounter) {
+        this.currentScore = scoreCounter;
+
+    }
+
+    public void hitEvent(Block beingHit, Ball hitter) {
+
+        currentScore.increase(10);
+        System.out.println(currentScore.getCount());
+    }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.awt.Color;
 
-public class Ball implements Sprite {
+public class Ball implements Sprite{
     Point center;
     double radius;
     java.awt.Color color;
@@ -17,6 +17,10 @@ public class Ball implements Sprite {
         this.radius = r;
         this.color = color;
         this.gameENV = gameENV;
+    }
+    //Ball has infinte life
+    public int getLife(){
+        return (int)Double.POSITIVE_INFINITY;
     }
 
     // accessors
@@ -30,6 +34,7 @@ public class Ball implements Sprite {
        // return (int) (this.radius*this.radius*Math.PI);
         return (int) this.radius;
     }
+
     public java.awt.Color getColor(){
         return this.color;
     }
@@ -83,7 +88,7 @@ public class Ball implements Sprite {
        Point collition = closestCollidable.collisionPoint();
        Collidable collitionObject = closestCollidable.collisionObject();
        this.center = new Point(collition.getX()-this.velocity.getDx()*Constants.EPS, collition.getY()-this.velocity.getDy()*Constants.EPS);
-       this.velocity = collitionObject.hit(collition,this.velocity);
+       this.velocity = collitionObject.hit(this,collition,this.velocity);
     }
     //returns random color from java.awt.Color lib
     public static java.awt.Color getRandomColor() {

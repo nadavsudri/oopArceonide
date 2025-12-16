@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class Paddle implements Sprite, Collidable {
     Rectangle shape;
-    private int speed = 7;
+    private int speed = 15;
     private Line top;
     private Line bottom;
     private Line left;
@@ -50,6 +50,12 @@ public class Paddle implements Sprite, Collidable {
             updateEdges();
         }
     }
+    //Paddle has infinte life
+    public int getLife(){
+        return (int)Double.POSITIVE_INFINITY;
+    }
+
+    //draw on a drawsurface
     public void drawOn(DrawSurface d){
         d.setColor(Color.yellow);
         d.fillRectangle((int)shape.topLeft.getX(),(int)shape.topLeft.getY(),(int)shape.getWidth(),(int)shape.getHeight());
@@ -61,18 +67,25 @@ public class Paddle implements Sprite, Collidable {
         return shape;
     }
     //covers the hit options -> the array is for "fun paddle".
-    public Velocity hit(Point collisionPoint, Velocity currentVelocity){
+    public Velocity hit(Ball hitter , Point collisionPoint, Velocity currentVelocity){
         Line [] tops = splitTop();
+        //middle part -> returns stright up.
         if(tops[2].isOnLine(collisionPoint)){
-            return (new Velocity(currentVelocity.getDx(),-currentVelocity.getDy()));}
+            return (Velocity.fromAngleAndSpeed(0,8)) ;}
+
+        // edges -> return 1.5 the X velocity
         if(tops[0].isOnLine(collisionPoint)){
-            return (new Velocity(1.5*currentVelocity.getDx(),-0.75*currentVelocity.getDy()));}
+            return (Velocity.fromAngleAndSpeed(120,8)) ;}
         if(tops[4].isOnLine(collisionPoint)){
-            return (new Velocity(1.5*currentVelocity.getDx(),-0.75*currentVelocity.getDy()));}
+            return (Velocity.fromAngleAndSpeed(240,8));}
+
+        // the between sections -> returns 1.2 the X velocity
         if(tops[1].isOnLine(collisionPoint)){
-            return (new Velocity(1.2*currentVelocity.getDx(),-currentVelocity.getDy()));}
+            return (Velocity.fromAngleAndSpeed(60,8));}
         if(tops[3].isOnLine(collisionPoint)){
-            return (new Velocity(1.2*currentVelocity.getDx(),-currentVelocity.getDy()));}
+            return (Velocity.fromAngleAndSpeed(320,8));}
+
+        //the rest of the lines -> returns like a regular block
         if(bottom.isOnLine(collisionPoint)){
             return (new Velocity(currentVelocity.getDx(),-currentVelocity.getDy()));}
         if(left.isOnLine(collisionPoint)){

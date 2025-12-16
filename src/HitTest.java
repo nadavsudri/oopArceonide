@@ -1,4 +1,8 @@
-package PACKAGE_NAME;
+public class HitTest implements HitListener{
 
-public class HitTest {
+    @Override
+    public void hitEvent(Block b, Ball ball) {
+        System.out.println("hit nigga");
+
+    }
 }

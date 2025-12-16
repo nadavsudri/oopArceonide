@@ -21,6 +21,7 @@ public class Velocity {
     }
     //uses trigonometry to convert dx and dy to angle and speed
     public static Velocity fromAngleAndSpeed(double angle, double speed) {
+        angle = Math.toRadians(angle);
         double dx =Math.cos(angle)*speed;
         double dy =Math.sin(angle)*speed;
         return new Velocity(dx, dy);

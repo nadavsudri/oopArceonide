@@ -1,4 +1,9 @@
-package PACKAGE_NAME;
+public class PrintHitLIstener implements HitListener {
 
-public class PrintHitLIstener {
+    @Override
+    public void hitEvent(Block beingHit, Ball hitter) {
+        System.out.println(beingHit);
+    }
+
+
 }
