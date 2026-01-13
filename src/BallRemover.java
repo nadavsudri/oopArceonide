@@ -1,9 +1,9 @@
 public class BallRemover implements HitListener{
 
-    Game game;
+    GameLevel game;
     private Counter remainingBalls;
 
-    public BallRemover(Game game, Counter remainingBalls){
+    public BallRemover(GameLevel game, Counter remainingBalls){
         this.game = game;
         this.remainingBalls = remainingBalls;
     }

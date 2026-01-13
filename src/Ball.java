@@ -103,4 +103,13 @@ public class Ball implements Sprite{
         moveOneStep();
     }
 
+    /**
+     * Adds the ball to the game level as a sprite.
+     * @param g the game level.
+     */
+    public void addToGame(GameLevel g) {
+        g.addSprite(this);
+    }
+
+
 }

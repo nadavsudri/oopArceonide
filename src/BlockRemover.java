@@ -1,10 +1,10 @@
 
 
 public class BlockRemover implements HitListener{
-    Game game;
+    GameLevel game;
     private Counter remainingBlocks;
 
-    public BlockRemover(Game game, Counter remainingBlocks){
+    public BlockRemover(GameLevel game, Counter remainingBlocks){
         this.game = game;
         this.remainingBlocks = remainingBlocks;
     }

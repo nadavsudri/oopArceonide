@@ -5,5 +5,5 @@ public interface Sprite {
     // notify the sprite that time has passed
     void timePassed();
 
-    int getLife();
+
 }
